@@ -32,7 +32,7 @@ To uninstall it from a specific conda environment write:
 
 > $ activate <Some_Environment_Name>
 >
-> $ pip unistall InputCheck
+> $ pip unistall Logger
 
 
 ## Examples
