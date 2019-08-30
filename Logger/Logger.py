@@ -23,7 +23,7 @@
 #  ==================================================================================
 
 import os
-import logging
+from logging import handlers, getLogger, Formatter, DEBUG
 
 class Logger: 
     """Organizes loggers and the corresponding log files for easy access. 
@@ -252,22 +252,22 @@ class Logger:
             The handler of the log file is a RotatingFileHandler with maxBytes=1024*1000 and backupCount=5.
         """
         if formatType == 'time-name-level-message':
-            FORMAT = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')
+            FORMAT = Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')
         elif formatType == 'time-level-message':
-            FORMAT = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')        
+            FORMAT = Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')        
         elif formatType == 'time-message':
-            FORMAT = logging.Formatter('%(asctime)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')        
+            FORMAT = Formatter('%(asctime)s - %(message)s', datefmt='%Y-%b-%d - %H:%M:%S')        
         elif formatType == 'level-message':
-            FORMAT = logging.Formatter('%(levelname)s - %(message)s')        
+            FORMAT = Formatter('%(levelname)s - %(message)s')        
         elif formatType == 'unformated':
-            FORMAT = logging.Formatter('')
+            FORMAT = Formatter('')
         else:
-            FORMAT = logging.Formatter('')
+            FORMAT = Formatter('')
 
-        logger = logging.getLogger(loggerName)    
-        logger.setLevel(logging.DEBUG)
+        logger = getLogger(loggerName)    
+        logger.setLevel(DEBUG)
 
-        fileHandler = logging.handlers.RotatingFileHandler(logFileFullPath, maxBytes=1024*1000, backupCount=5)
+        fileHandler = handlers.RotatingFileHandler(logFileFullPath, maxBytes=1024*1000, backupCount=5)
         fileHandler.setFormatter(FORMAT)
         logger.addHandler(fileHandler)
 
